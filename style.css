@@ -43,7 +43,7 @@ game-intro {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 0.5rem;
+  border-radius: 1.3rem;
 }
 .tic-tac-toe .game-board {
   position: relative;
@@ -155,4 +155,20 @@ game-intro {
 }
 .history-buttons button:disabled {
   cursor: not-allowed;
+}
+.history-buttons button i {
+  /* Center the icon within the button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for X symbol */
+.x-symbol {
+  color: #ff5733; /* You can change this color to your preference */
+}
+
+/* Style for O symbol */
+.o-symbol {
+  color: #33aaff; /* You can change this color to your preference */
 }/*# sourceMappingURL=style.css.map */

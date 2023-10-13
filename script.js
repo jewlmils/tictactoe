@@ -1,7 +1,26 @@
 const boardCells = document.querySelectorAll(".board-cell");
 const turn = document.querySelector(".turn");
 const result = document.querySelector(".result");
+const hisMsg = document.querySelector("#historyMessage");
+const hisBtns = document.querySelector("#historyButtons");
+const hisBtn = document.querySelector("#hisBtn");
+const prevBtn = document.querySelector("#prevBtn");
+const nextBtn = document.querySelector("#nextBtn");
+const resBtn = document.querySelector("#resBtn");
+const resBtn2 = document.querySelector("#resBtn2");
+const hisMsgTxtElement = document.querySelector("[data-history-message-text]");
+// modal and start intro
+const modal = document.querySelector("#startModal");
+const xBtn = document.querySelector("#startWithX");
+const oBtn = document.querySelector("#startWithO");
 
+const titleIntro = document.querySelector(".title-intro");
+const startIntro = document.querySelector(".start");
+
+const gameIntro = document.querySelector(".game-intro");
+const gameBoard = document.querySelector(".game-board");
+
+const eModal = document.querySelector("#endModal");
 // symbol
 const playerX = "X";
 const playerO = "O";
@@ -19,41 +38,6 @@ let board = [
 let history = [];
 let historyCounter = 0;
 
-const hisMsg = document.querySelector("#historyMessage");
-const hisBtns = document.querySelector("#historyButtons");
-const hisBtn = document.querySelector("#hisBtn");
-const prevBtn = document.querySelector("#prevBtn");
-const nextBtn = document.querySelector("#nextBtn");
-const resBtn = document.querySelector("#resBtn");
-const resBtn2 = document.querySelector("#resBtn2");
-const hisMsgTxtElement = document.querySelector("[data-history-message-text]");
-
-// event listener , prev btn, next btn, restart sa screen
-resBtn.addEventListener("click", restartGame);
-prevBtn.addEventListener("click", prevHistory);
-nextBtn.addEventListener("click", nextHistory);
-
-// itago ang prev and next history habang in game
-prevBtn.style.display = "none";
-nextBtn.style.display = "none";
-
-// event listener history and restart button sa modal
-hisBtn.addEventListener("click", showHistory);
-resBtn2.addEventListener("click", function () {
-  location.reload();
-});
-
-// modal and start intro
-const modal = document.querySelector("#startModal");
-const xBtn = document.querySelector("#startWithX");
-const oBtn = document.querySelector("#startWithO");
-
-const titleIntro = document.querySelector(".title-intro");
-const startIntro = document.querySelector(".start");
-
-const gameIntro = document.querySelector(".game-intro");
-const gameBoard = document.querySelector(".game-board");
-
 modal.style.display = "none";
 titleIntro.style.display = "block";
 hisMsg.style.display = "none";
@@ -61,6 +45,7 @@ turn.style.display = "none";
 gameIntro.style.display = "none";
 gameBoard.style.display = "none";
 
+// start intro ng logo at start button
 startIntro.addEventListener("click", function () {
   modal.style.display = "block";
   titleIntro.style.display = "none";
@@ -83,6 +68,20 @@ oBtn.addEventListener("click", function () {
   startGame();
 });
 
+// event listener , prev btn, next btn, restart sa screen
+resBtn.addEventListener("click", restartGame);
+prevBtn.addEventListener("click", prevHistory);
+nextBtn.addEventListener("click", nextHistory);
+
+// itago ang prev and next history habang in game
+prevBtn.style.display = "none";
+nextBtn.style.display = "none";
+
+// event listener history and restart button sa modal
+hisBtn.addEventListener("click", showHistory);
+resBtn2.addEventListener("click", function () {
+  location.reload();
+});
 
 // start game function
 function startGame() {
@@ -90,6 +89,7 @@ function startGame() {
   console.log(board);
   console.log(historyCounter);
   gameIsOver = false;
+  // clear the cell content and add event listener
   boardCells.forEach((cell, index) => {
     cell.innerHTML = "";
     cell.addEventListener("click", handleClick.bind(null, cell, index));
@@ -106,21 +106,24 @@ function handleClick(cell, index) {
   if (cellValue === "") {
     if (turn.innerHTML === "Player X") {
       cell.innerHTML = playerX;
+      cell.style.color = "#fbb9c5";
       turn.innerHTML = "Player O";
       // insert into array
       board[Math.floor(index / 3)][index % 3] = playerX;
-      saveState(index, playerX); // Store the move
+      saveState(index, playerX);
     } else {
       cell.innerHTML = playerO;
+      cell.style.color = "#c3edbf"; 
       turn.innerHTML = "Player X";
       // insert into array
       board[Math.floor(index / 3)][index % 3] = playerO;
-      saveState(index, playerO); // Store the move
+      saveState(index, playerO); 
     }
     // check if someone won
     checkWinner();
   }
 }
+
 
 function checkWinner() {
   // check for rows
@@ -237,16 +240,14 @@ function replayMoves(targetIndex) {
     cell.innerHTML = "";
   });
 
-  history.slice(0, targetIndex).forEach(({ index, playerSymbol }) => {
+  history.slice(0, targetIndex + 1).forEach(({ index, playerSymbol }) => {
     const cell = boardCells[index];
     cell.innerHTML = playerSymbol;
-    turn.innerHTML = "This is how you won!";
+    turn.innerHTML = "You Win!";
     // const nextPlayer = playerSymbol === playerX ? playerO : playerX;
     // turn.innerHTML = `Player ${nextPlayer}`;
   });
 }
-
-const eModal = document.querySelector("#endModal");
 
 function showResult(symbol) {
   if (symbol === playerX) {
@@ -256,10 +257,13 @@ function showResult(symbol) {
   } else {
     result.innerHTML = "Tie!";
   }
+
   console.log(board);
   result.style.display = "flex";
   turn.innerHTML = "Game Over";
-  eModal.style.display = "block";
+  setTimeout(function () {
+    eModal.style.display = "block";
+  }, 1000);
 }
 
 function restartGame() {
