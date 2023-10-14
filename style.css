@@ -157,7 +157,6 @@ game-intro {
   cursor: not-allowed;
 }
 .history-buttons button i {
-  /* Center the icon within the button */
   display: flex;
   align-items: center;
   justify-content: center;

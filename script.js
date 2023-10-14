@@ -40,6 +40,10 @@ let historyCounter = 0;
 
 titleIntro.style.display = "block";
 gameBoard.style.display = "none";
+modal.style.display = "none";
+hisMsg.style.display = "none";
+turn.style.display = "none";
+gameIntro.style.display = "none";
 
 // start intro ng logo at start button
 startIntro.addEventListener("click", function () {

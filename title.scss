@@ -31,7 +31,7 @@ body {
   }
 
   button {
-    font-family: 'Sprinkle', sans-serif;
+    font-family: "Sprinkle", sans-serif;
     padding: 0.8rem;
     width: clamp(8rem, 3.429rem + 9.524vw, 12rem);
     font-size: clamp(1rem, 0.643rem + 0.952vw, 1.5rem);
@@ -47,21 +47,21 @@ body {
 }
 
 section {
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    background: rgb(130, 192, 238);
-    background: linear-gradient(
-      177deg,
-      rgba(130, 192, 238, 1) 2%,
-      rgba(197, 198, 231, 1) 98%
-    );
-    z-index: -999;
-  }
-  
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background: rgb(130, 192, 238);
+  background: linear-gradient(
+    177deg,
+    rgba(130, 192, 238, 1) 2%,
+    rgba(197, 198, 231, 1) 98%
+  );
+  z-index: -999;
+}
+
 #bunnies {
-    z-index: -999;
+  z-index: -999;
 }
 
 .bunny {
@@ -70,10 +70,14 @@ section {
   height: 100%;
   top: 0;
   left: 0;
-  
+
   div {
     position: absolute;
     display: block;
+
+    img {
+      width: clamp(2.5rem, 1.429rem + 2.857vw, 4rem);
+    }
   }
 }
 
