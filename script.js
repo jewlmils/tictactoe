@@ -38,11 +38,7 @@ let board = [
 let history = [];
 let historyCounter = 0;
 
-modal.style.display = "none";
 titleIntro.style.display = "block";
-hisMsg.style.display = "none";
-turn.style.display = "none";
-gameIntro.style.display = "none";
 gameBoard.style.display = "none";
 
 // start intro ng logo at start button
@@ -113,17 +109,16 @@ function handleClick(cell, index) {
       saveState(index, playerX);
     } else {
       cell.innerHTML = playerO;
-      cell.style.color = "#c3edbf"; 
+      cell.style.color = "#c3edbf";
       turn.innerHTML = "Player X";
       // insert into array
       board[Math.floor(index / 3)][index % 3] = playerO;
-      saveState(index, playerO); 
+      saveState(index, playerO);
     }
     // check if someone won
     checkWinner();
   }
 }
-
 
 function checkWinner() {
   // check for rows
@@ -224,7 +219,7 @@ function nextHistory() {
     nextBtn.disabled = true;
   }
 }
-// Helper function to clear the board without resetting cell innerHTML
+// clear the board without resetting cell innerHTML
 function resetBoard() {
   board = [
     ["", "", ""],
@@ -233,7 +228,7 @@ function resetBoard() {
   ];
 }
 
-// Helper function to replay moves up to a given index in history
+// replay moves up to a given index in history
 function replayMoves(targetIndex) {
   // Clear the board
   boardCells.forEach((cell) => {

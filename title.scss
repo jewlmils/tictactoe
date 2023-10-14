@@ -21,6 +21,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 999;
+  transition: background-image 1s ease-in-out;
   display: none;
 
   img {
@@ -69,16 +70,19 @@ section {
   height: 100%;
   top: 0;
   left: 0;
+  
+  div {
+    position: absolute;
+    display: block;
+  }
 }
-.bunny div {
-  position: absolute;
-  display: block;
-}
+
 .bunny div:nth-child(1) {
   left: 20%;
   animation: fall 15s linear infinite;
   animation-delay: -2s;
 }
+
 .bunny div:nth-child(2) {
   left: 70%;
   animation: fall 15s linear infinite;
